@@ -17,9 +17,16 @@ class BaseModel():
         """
         Instantiate an instance of BaseModel
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
+        if len(kwargs) < 1:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
+        else:
+            self.id = str(kwargs['id'])
+            self.created_at = datetime.datetime.\
+                strptime(kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
+            self.updated_at = datetime.datetime.\
+                strptime(kwargs['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
         
     def save(self):
         """
