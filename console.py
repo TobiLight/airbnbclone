@@ -11,7 +11,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     
     def do_EOF(self, line):
-        """Exit the program using EOF (Ctrl+D)"""
+        """Exit the program  using EOF (Ctrl+D)"""
         print()
         return True
     
