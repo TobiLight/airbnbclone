@@ -20,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
         return True
     
     def emptyline(self):
-        """Do nothing on  empty line"""
+        """Do nothing on empty line"""
         pass
     
     
