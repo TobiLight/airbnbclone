@@ -6,6 +6,7 @@ Defines a base model class BaseModel
 """
 import uuid
 import datetime
+import models
 
 
 class BaseModel():
@@ -21,19 +22,22 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
         else:
-            self.id = str(kwargs['id'])
-            self.created_at = datetime.datetime.\
-                strptime(kwargs['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = datetime.datetime.\
-                strptime(kwargs['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
-        
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key == 'created_at' or key == 'updated_at':
+                        value = datetime.datetime.\
+                            strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
+
     def save(self):
         """
         Updates the public instance attribute updated_at with the current
         datetime
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
