@@ -46,12 +46,10 @@ class FileStorage:
         """
         Deserializes the JSON file to __objects
         """
-        # Check the file exists
         try:
             with open(self.__file_path, 'r', encoding="utf-8") as JSON_File:
                 json_file = json.load(JSON_File)
                 for obj in json_file.values():
-                    # eval("{}({})".format(obj['__class__'], '**obj'))
                     self.new(eval("{}({})".format(obj['__class__'], '**obj')))
         except FileNotFoundError:
             pass
