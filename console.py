@@ -6,13 +6,14 @@ Entry point of the command interpreter
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 import models
 import shlex
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
-    classes = ["BaseModel", "UserModel"]
+    classes = ["BaseModel", "User"]
 
     def emptyline(self):
         """Do nothing on empty line"""
