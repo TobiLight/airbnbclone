@@ -16,6 +16,7 @@ import models
 import shlex
 
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
